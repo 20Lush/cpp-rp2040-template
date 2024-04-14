@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TOP_LVL_PROJECT_NAME="chassis-prototype"
+
 # Default directory to build into
 BUILD_DIRECTORY="$PWD/../build"
 BUILD_TYPE="DEBUG"
@@ -10,6 +12,12 @@ CMAKE_BOILERPLATE="$PWD/../.CMake-Boilerplate"
 # Default directory to install package to
 INSTALL_DIRECTORY="${BUILD_DIRECTORY}/install"
 
+SCRIPT_DIRECTORY="$PWD"
+
+UPLOAD=false
+
+CLEAN=false
+
 # Build with unit tests
 TESTING=false
 
@@ -17,7 +25,7 @@ TESTING=false
 BOARD_NAME="sparkfun_promicro"
 
 # Handle command line arguments
-while getopts 'b:thn:' opt; do
+while getopts 'b:thn:p:uc' opt; do
     case "$opt" in
         b)
             BUILD_TYPE="$OPTARG"
@@ -35,6 +43,18 @@ while getopts 'b:thn:' opt; do
             echo "Setting board name..."
             BOARD_NAME="$OPTARG"
             ;;
+        p)
+            echo "Setting project name..."
+            TOP_LVL_PROJECT_NAME="$OPTARG"
+            ;;
+        u)
+            echo "Uploading after build..."
+            UPLOAD=true
+            ;;
+        c)
+            echo "Cleaning build dir first.."
+            CLEAN=true
+            ;;
         :)
             echo -e "Option flag required when passing in an argument. Stop."
             exit 1
@@ -43,6 +63,12 @@ while getopts 'b:thn:' opt; do
 done
 
 shift "$(($OPTIND -1))"
+
+if [ "$CLEAN" = true ]; then
+
+    rm -rf "$PWD/../build"
+
+fi
 
 echo "====== BUILD DIALOGUE ====================================================================================="
 echo "      !!! Building in $BUILD_DIRECTORY !!!                                                                 "
@@ -59,6 +85,15 @@ cmake   -DCMAKE_BOILERPLATE_PATH=${CMAKE_BOILERPLATES} \
         -DENABLE_TESTING=${TESTING} \
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
         -DPICO_BOARD=${BOARD_NAME} \
+        -DTOP_LVL_PROJECT_NAME=${TOP_LVL_PROJECT_NAME} \
         ..
 cmake --build . -j 8
 cmake --install .
+
+cd ${SCRIPT_DIRECTORY}
+if [ "$UPLOAD" = true ]; then
+
+    BINARY_DIRECTORY=${INSTALL_DIRECTORY}/bin/
+
+    ./upload.sh -b ${TOP_LVL_PROJECT_NAME}
+fi

@@ -13,10 +13,10 @@ cd ..
 cp ./.Dependencies/.clang-format ./
 
 # Handle command line arguments
-while getopts 'v:h' opt; do
+while getopts 'vh' opt; do
     case "$opt" in
         v)
-            $VERIFY_MODE=true
+            VERIFY_MODE=true
             ;;
         h)
             echo "====== HELP DIALOGUE ===================================================================="
@@ -32,7 +32,7 @@ while getopts 'v:h' opt; do
 done
 
 # TBD verify mode to check if commits follow my rules
-if $VERIFY_MODE; then
+if [ "$VERIFY_MODE" = true ]; then
 
     echo "[INFO] Verifying formatting in source/headers... "
     exit 0
