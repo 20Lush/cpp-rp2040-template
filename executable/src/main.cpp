@@ -1,5 +1,6 @@
-
 #include "main.hpp"
+
+#include <pico/stdlib.h>
 
 // Make sure to change the namespace EXECUTABLE to something more specific
 namespace lush::EXECUTABLE {

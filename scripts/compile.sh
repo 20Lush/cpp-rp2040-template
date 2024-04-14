@@ -13,8 +13,11 @@ INSTALL_DIRECTORY="${BUILD_DIRECTORY}/install"
 # Build with unit tests
 TESTING=false
 
+# Board name we are building for, typically a flavor of rp2040. Defaults to sparkfun promicro
+BOARD_NAME="sparkfun_promicro"
+
 # Handle command line arguments
-while getopts 'b:th' opt; do
+while getopts 'b:thn:' opt; do
     case "$opt" in
         b)
             BUILD_TYPE="$OPTARG"
@@ -27,6 +30,10 @@ while getopts 'b:th' opt; do
             echo "  Usage: $(basename $0) [-h help] [-b built type(DEBUG or RELEASE)] [-t enable testing]  "
             echo "========================================================================================="
             exit 1
+            ;;
+        n)
+            echo "Setting board name..."
+            BOARD_NAME="$OPTARG"
             ;;
         :)
             echo -e "Option flag required when passing in an argument. Stop."
@@ -47,6 +54,11 @@ mkdir -p ${BUILD_DIRECTORY}
 cd ${BUILD_DIRECTORY}
 
 # cmake command line calls that define some build/install environment variables like install directory and if we want unit testing
-cmake -DCMAKE_BOILERPLATE_PATH=${CMAKE_BOILERPLATES} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIRECTORY} -DENABLE_TESTING=${TESTING} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ..
+cmake   -DCMAKE_BOILERPLATE_PATH=${CMAKE_BOILERPLATES} \
+        -DCMAKE_INSTALL_PREFIX=${INSTALL_DIRECTORY} \
+        -DENABLE_TESTING=${TESTING} \
+        -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
+        -DPICO_BOARD=${BOARD_NAME} \
+        ..
 cmake --build . -j 8
 cmake --install .
