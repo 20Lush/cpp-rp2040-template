@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 
 if(NOT DEFINED TOP_LVL_PROJECT_NAME)
-    set(TOP_LVL_PROJECT_NAME "default_name")
+    set(TOP_LVL_PROJECT_NAME "sparkfun_promicro")
 endif(NOT DEFINED TOP_LVL_PROJECT_NAME)
 
 # We grab our boilerplate stuff up here since we might need it multiple times in the repo
@@ -15,9 +15,10 @@ include(${CMAKE_BOILERPLATE_PATH}/pico_sdk_import.cmake)
 set(PROJECT_VERSION 1.0.0)
 
 # Initialize our project regarding the whole repo, and give it its version.
-project("${TOP_LVL_PROJECT_NAME}_REPO"
+project("${TOP_LVL_PROJECT_NAME}"
     VERSION ${PROJECT_VERSION}
     DESCRIPTION "EXECUTABLE Repository"
+    LANGUAGES C CXX ASM
 )
 message(STATUS "Repository name: " ${PROJECT_NAME})
 

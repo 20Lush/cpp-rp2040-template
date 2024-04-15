@@ -1,28 +1,16 @@
-#include "main.hpp"
 
+#include <stdio.h>
 #include <pico/stdlib.h>
 
-// Make sure to change the namespace EXECUTABLE to something more specific
-namespace lush::EXECUTABLE {
+#include <stdio.h>
+#include "tusb.h"
+#include "pico/stdlib.h"
 
-	// Any forward declerations?
+int main() {
+    stdio_init_all();
 
-	bool print_args(int argc, char** argv) {
-
-		std::cout << "args: ";
-		for (int idx = 0; idx < argc; idx++) {
-			std::cout << argv[idx] << " ";
-		}
-		std::cout << std::endl;
-
-		return true;
-	}
-
-}  // namespace lush::EXECUTABLE
-
-int main(int argc, char** argv) {
-
-	std::cout << "Hello World! Executable given " << argc << " arguments." << std::endl;
-
-	lush::EXECUTABLE::print_args(argc, argv);
+    while (true) {
+        printf("Hello, world!\n");
+        sleep_ms(1000);
+    }
 }

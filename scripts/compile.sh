@@ -4,7 +4,7 @@ TOP_LVL_PROJECT_NAME="chassis-prototype"
 
 # Default directory to build into
 BUILD_DIRECTORY="$PWD/../build"
-BUILD_TYPE="DEBUG"
+BUILD_TYPE="Debug"
 
 # Default directory of cmake boilerplate scripts
 CMAKE_BOILERPLATE="$PWD/../.CMake-Boilerplate"

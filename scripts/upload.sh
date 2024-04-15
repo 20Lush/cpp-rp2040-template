@@ -1,10 +1,9 @@
 
 SCRIPT_DIR="$PWD"
 BUILD_DIR="${SCRIPT_DIR}/../build"
-ELF2UF_BIN_DIR="${BUILD_DIR}/elf2uf2/elf2uf2"
 
 BINARY="default_name"
-BINARY_DIR="${BUILD_DIR}/install/bin/"
+BINARY_DIR="${BUILD_DIR}/executable"
 
 # Handle command line arguments
 while getopts 'd:b:' opt; do
@@ -22,8 +21,5 @@ while getopts 'd:b:' opt; do
     esac
 done
 
-${ELF2UF_BIN_DIR} "${BINARY_DIR}${BINARY}.elf" "${BINARY_DIR}${BINARY}.uf2"
-
-UF2_BIN_DIR="${BINARY_DIR}${BINARY}.uf2"
-
-picotool load ${UF2_BIN_DIR}
+UF2_BIN_DIR="${BINARY_DIR}/${BINARY}.uf2"
+picotool load ${UF2_BIN_DIR} -f
