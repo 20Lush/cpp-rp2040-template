@@ -34,7 +34,7 @@ while getopts 'b:hn:p:uc' opt; do
             ;;
         h)
             echo "====== HELP DIALOGUE ===================================================================="
-            echo "  Usage: $(basename $0) [-h help] [-b built type(DEBUG or RELEASE)] [-t enable testing]  "
+            echo "  Usage: $(basename $0) [-h help] [-b built type(Debug or Release)] [-t enable testing]  "
             echo "========================================================================================="
             exit 1
             ;;
