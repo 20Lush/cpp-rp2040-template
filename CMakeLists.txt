@@ -49,4 +49,4 @@ endif()
 set(PACKAGE_HINTS ${CMAKE_INSTALL_PREFIX})
 
 # Add our subdirectories we want to build and install
-add_subdirectory(executable)
+add_subdirectory(firmware)
