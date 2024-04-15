@@ -16,7 +16,7 @@ namespace lush::rp2040 {
 
 /** @brief The entry point of the program
  *  @note  Args not included, and I recommend not even bothering with it :)
- *  @returns Probably shouldn't return unless something bad has gone wrong and you have a debugger attached to see it 
+ *  @returns Probably shouldn't return unless something bad has happened and you have a debugger attached to see it 
 */
 int main() {
 
