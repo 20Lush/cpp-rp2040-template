@@ -47,3 +47,6 @@ You are primarily going to be working out of the `scripts/` directory, and all o
     * `-c` is another useful flag that will UNSAFELY delete `build/` which can be used to get out of any ninja or cmake jam.
     * `-b` can be used like `-b Release` to target release build optimizations, as the build process is defaulted to `Debug`
 
+## Notes
+- The `compile.sh` script needs some configuring if you are using a special board type or want to name your binary something other than "my-firmware". The values to mess with are at the very top.
+
