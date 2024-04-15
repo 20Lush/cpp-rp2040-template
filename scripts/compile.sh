@@ -2,7 +2,7 @@
 
 ############################# CONFIGURABLES #############################################################
 # Name of the project, the binary will end up looking like <project_name>.uf2                           #
-TOP_LVL_PROJECT_NAME="chassis-prototype"                                                                #
+TOP_LVL_PROJECT_NAME="my-firmware"                                                                #
 # Board name we are building for, typically a flavor of rp2040. Defaults to sparkfun promicro           #
 BOARD_NAME="sparkfun_promicro"                                                                          #
 #########################################################################################################
